@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/*Formulario*/
+form {
+
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+fieldset {
+    margin-bottom: 20px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+legend {
+    font-weight: bold;
+    font-size: 1.5em;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    width: 100%;
+}
+label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+textarea {
+    height: 100px;
+    min-height: 50px;
+    resize: vertical;
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    grid-column-start: 2;
+}
+.checkbox-container input {
+    width: auto;
+    margin-right: 10px;
+}
+
+input[type="radio"], input[type="checkbox"]{
+    width: auto;
+}
+
+/*Select*/
+select {
+    display: inline-block;
+    height: 33px;
+    padding: 0 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #e6f0ff;
+}
+.select-dni{
+    display: flex;
+    gap: 5px;
+}
+
+#birthYear{
+    width: 100%;
+}
+/*Columnas*/
+.col2-Cont{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1em;
+}
+.col3-Cont{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 1em;
+}
+
+/*Margins*/
+.mt-1{
+    margin-top: 1em;
+}
+
+.counter{
+    width: 100%;
+    text-align: end;
+    color: #333;
+    line-height: 0;
+}

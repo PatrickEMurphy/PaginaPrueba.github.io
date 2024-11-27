@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ut04-01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="https://www.w3schools.com/action_page.php" method="post">
+        <!-- Datos de Usuario -->
+        <fieldset>
+            <legend>Datos de Usuario</legend>
+            <div class="col2-Cont">
+                <div>
+                    <label for="username">Nombre de Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required>
+                </div>
+                
+                <div>
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showPassword" name="showPassword">
+                    <label for="showPassword">Mostrar contraseña</label>
+                </div>
+            </div>     
+        </fieldset>
+
+        <!-- Datos Personales -->
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <div class="col2-Cont">
+                <div>
+                    <label for="firstName">Nombre</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required>
+                </div>
+                <div>
+                    <label for="lastName">Apellidos</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Apellidos" required>
+                </div>
+                <div>
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Elemplo (+34)111222333">
+                </div>
+                <div>
+                    <label for="postalCode">Código Postal</label>
+                    <input type="text" id="postalCode" name="postalCode" placeholder="Códigopostal" pattern="[0-9]{5}">
+                </div>
+            </div>
+            <div class="col3-Cont mt-1">
+                <div>
+                    <label for="dniSelect">DNI / NIE</label>
+                    <div class="select-dni">
+                        <select name="dniSelect" id="dniSelect">
+                            <option value="">--</option>
+                            <option value="dni">DNI</option>
+                            <option value="nie">NIE</option>
+                        </select>
+                        <input id="DniNie" type="text" placeholder="DNI / NIE" disabled/>
+                    </div>
+                </div>
+                <div>
+                    <label>Crear cuenta como</label><br>
+                    <label>Particular</label>
+                    <input type="radio" name="accountType" value="particular" required>
+                    <label>Empresa</label>
+                    <input type="radio" name="accountType" value="empresa">
+                </div>   
+                <div>
+                    <label for="">Año de nacimiento</label><br>
+                    <select name="birthYear" id="birthYear">
+                        <!-- Opciones generadas dinámicamente -->
+
+                    </select>
+                </div>
+            </div>
+            <p>Elige tus aficiones:</p>
+            <div class="col3-Cont gap">
+                <div class="aficion">
+                    <input type="checkbox" name="musica" value="musica" id="musica">
+                    <label for="musica">Música</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" name="deportes" value="deportes" id="deportes">
+                    <label for="deportes">Deportes</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" name="videojuegos" value="videojuegos" id="videojuegos">
+                    <label for="videojuegos">Videojuegos</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" name="manualidades" value="manualidades" id="manualidades">
+                    <label for="manualidades">Manualidades</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" name="artes" value="artes" id="artes">
+                    <label for="artes">Artes</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" name="lectura" value="lectura" id="lectura">
+                    <label for="lectura">Lectura</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Datos de Publicación -->
+        <fieldset>
+            <legend>Datos de Publicación</legend>
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" placeholder="Introduce el título de la publicación" required maxlength="15">
+            <div id="titleCounter" class="counter">0/15</div>
+
+            <label for="description" class="mt-1">Descripción</label>
+            <textarea id="description" name="description" placeholder="Añade aquí la descripción" maxlength="120"></textarea>
+            <div id="descriptionCounter" class="counter">0/120</div>
+        </fieldset>
+
+        <!-- Botón de Envío -->
+        <button type="submit">Enviar</button>
+    </form>
+
+    <!--Mostrar contraseña -->
+    <script>
+        // Obtenemos el checkbox y el input de la contraseña
+        const showPasswordCheckbox = document.getElementById('showPassword');
+        const passwordInput = document.getElementById('password');
+    
+        // Añadimos un evento al checkbox
+        showPasswordCheckbox.addEventListener('change', function() {
+            // Si el checkbox está marcado, cambiamos el tipo de input a 'text', sino a 'password'
+            if (showPasswordCheckbox.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
+
+    <!-- habilitar DNI / NIE Input-->
+    <script>
+        // Obtenemos los elementos select e input
+        const dniSelect = document.getElementById("dniSelect");
+        const dniInput = document.getElementById("DniNie");
+    
+        // Añadimos un listener para detectar el cambio en el select
+        dniSelect.addEventListener("change", function() {
+            if (dniSelect.value) {
+                // Habilitamos el input si se selecciona una opción
+                dniInput.disabled = false;
+            } else {
+                // Deshabilitamos el input si no se selecciona una opción
+                dniInput.disabled = true;
+            }
+        });
+    </script>
+
+    <!-- Selector del año de necimiento -->
+    <script>
+        // Obtenemos el año actual
+        const currentYear = new Date().getFullYear();
+    
+        // Obtenemos el select donde se añadiran los años
+        const selectElement = document.getElementById("birthYear");
+    
+        // Generamos las opciones para los años desde 1900 hasta el año actual
+        for (let year = currentYear; year >= 1900; year--) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            selectElement.appendChild(option);
+        }
+    </script>
+
+    <!--Contador de palabras-->
+    <script>
+        // Obtenemos los elementos del título y descripción
+        const titleInput = document.getElementById('title');
+        const descriptionInput = document.getElementById('description');
+        
+        // Elementos para mostrar el contador
+        const titleCounter = document.getElementById('titleCounter');
+        const descriptionCounter = document.getElementById('descriptionCounter');
+    
+        // Función para actualizar el contador del título
+        titleInput.addEventListener('input', function() {
+            const currentLength = titleInput.value.length;
+            titleCounter.textContent = `${currentLength}/15`;
+        });
+    
+        // Función para actualizar el contador de la descripción
+        descriptionInput.addEventListener('input', function() {
+            const currentLength = descriptionInput.value.length;
+            descriptionCounter.textContent = `${currentLength}/120`;
+        });
+    </script>
+</body>
+</html>

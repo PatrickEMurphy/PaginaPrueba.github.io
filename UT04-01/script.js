@@ -1,3 +1,27 @@
+const DOM = {
+    username: document.getElementById("username"),
+    password: document.getElementById("password"),
+    form: document.getElementById("form"),
+    errorUser: document.getElementById("errorUser"),
+    errorPass: document.getElementById("errorPass"),
+};
+
+// Validaciones
+DOM.form.addEventListener("submit", (e)=>{
+    DOM.errorUser.textContent = DOM.username.validationMessage;
+    DOM.errorPass.textContent = "Introduce contraseña";
+    e.preventDefault(); 
+})
+
+
+
+
+
+
+
+
+
+
 // Mostrar contraseña
 // Obtenemos el checkbox y el input de la contraseña
 const showPasswordCheckbox = document.getElementById('showPassword');

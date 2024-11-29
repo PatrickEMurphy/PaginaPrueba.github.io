@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="form.css">
 </head>
 <body>
-    <form action="https://www.w3schools.com/action_page.php" method="post">
+    <form id="form" action="https://www.w3schools.com/action_page.php" method="post" novalidate>
         <!-- Datos de Usuario -->
         <fieldset>
             <legend>Datos de Usuario</legend>
             <div class="col2-Cont">
                 <div>
                     <label for="username">Nombre de Usuario</label>
-                <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required>
+                    <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required>
+                    <span id="errorUser" class="validation-message" for="username">(Este mensaje cambia al hacer subit si no es válido)</span>
                 </div>
                 
                 <div>
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
+                    <span id="errorPass" class="validation-message" for="password"></span>
                 </div>
 
                 <div class="checkbox-container">

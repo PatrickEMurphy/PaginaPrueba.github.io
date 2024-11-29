@@ -100,7 +100,7 @@ select:focus {
 .col2-Cont{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0 1em;
+    gap: 1em;
 }
 .col3-Cont{
     display: grid;
@@ -127,4 +127,9 @@ select:focus {
     position: relative;
     top: 10px;
     margin-top: 1em;
+}
+
+.validation-message{
+    color: red;
+    font-weight: 600;
 }

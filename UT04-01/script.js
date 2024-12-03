@@ -1,23 +1,49 @@
 const DOM = {
+    form: document.getElementById("form"),
     username: document.getElementById("username"),
     password: document.getElementById("password"),
-    form: document.getElementById("form"),
-    errorUser: document.getElementById("errorUser"),
-    errorPass: document.getElementById("errorPass"),
+};
+
+const ERROR = {
+    User: document.getElementById("errorUser"),
+    Pass: document.getElementById("errorPass"),
+    Name: document.getElementById(""),
+    LastName: document.getElementById(""),
+    Tel: document.getElementById(""),
+    Postal: document.getElementById(""),
+    DNI_NIE: document.getElementById(""),
+    AccountType: document.getElementById(""),
+    BirthYear: document.getElementById(""),
+    Hobbies: document.getElementById("errorAficiones"),
+    PublicationTitle: document.getElementById("errorPubTitle"),
+    PublicationDescription: document.getElementById("errorPubDesc"),
 };
 
 // Validaciones
 DOM.form.addEventListener("submit", (e)=>{
-    DOM.errorUser.textContent = DOM.username.validationMessage;
-    DOM.errorPass.textContent = "Introduce contraseña";
-    e.preventDefault(); 
+    checkboxInput();
+    ERROR.User.textContent = DOM.username.validationMessage;
+    ERROR.Pass.textContent = DOM.password.validationMessage;
+    //e.preventDefault(); 
 })
 
+// Comprobar chackbox.
+function checkboxInput(){
+    let checkboxes = document.querySelectorAll('.aficion > input[type="checkbox"]');
+    let hiddenInput = document.getElementById('aficiones');
 
+    checkboxes = [...checkboxes];
 
+    const checkedValues = checkboxes
+        .filter(checkbox => checkbox.checked) // Filtro de los seleccionados
+        .map(checkbox => checkbox.value);    // Valores de los seleccionados
 
-
-
+    if (checkedValues.length >= 2) {
+        hiddenInput.value = checkedValues.join(",");
+    } else {
+        hiddenInput.value = null;
+    }
+}
 
 
 

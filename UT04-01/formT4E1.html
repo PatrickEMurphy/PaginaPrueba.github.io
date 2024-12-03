@@ -15,7 +15,7 @@
                 <div>
                     <label for="username">Nombre de Usuario</label>
                     <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required>
-                    <span id="errorUser" class="validation-message" for="username">(Este mensaje cambia al hacer subit si no es válido)</span>
+                    <span id="errorUser" class="validation-message" for="username"></span>
                 </div>
                 
                 <div>
@@ -45,11 +45,11 @@
                 </div>
                 <div>
                     <label for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Elemplo (+34)111222333">
+                    <input type="tel" id="phone" name="phone" placeholder="Elemplo (+34)111222333" required>
                 </div>
                 <div>
                     <label for="postalCode">Código Postal</label>
-                    <input type="text" id="postalCode" name="postalCode" placeholder="Códigopostal" pattern="[0-9]{5}">
+                    <input type="text" id="postalCode" name="postalCode" placeholder="Códigopostal" pattern="[0-9]{5}" required>
                 </div>
             </div>
             <div class="col3-Cont mt-1">
@@ -61,7 +61,7 @@
                             <option value="dni">DNI</option>
                             <option value="nie">NIE</option>
                         </select>
-                        <input id="DniNie" type="text" name="DniNie" placeholder="DNI / NIE" disabled/>
+                        <input id="DniNie" type="text" name="DniNie" placeholder="DNI / NIE" disabled required/>
                     </div>
                 </div>
                 <div>
@@ -69,7 +69,7 @@
                     <label>Particular</label>
                     <input type="radio" name="accountType" value="particular" required>
                     <label>Empresa</label>
-                    <input type="radio" name="accountType" value="empresa">
+                    <input type="radio" name="accountType" value="empresa" required>
                 </div>   
                 <div>
                     <label for="">Año de nacimiento</label><br>
@@ -82,29 +82,31 @@
             <p>Elige tus aficiones:</p>
             <div class="col3-Cont gap">
                 <div class="aficion">
-                    <input type="checkbox" name="musica" value="musica" id="musica">
+                    <input type="checkbox" value="MU" id="musica">
                     <label for="musica">Música</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" name="deportes" value="deportes" id="deportes">
+                    <input type="checkbox" value="DE" id="deportes">
                     <label for="deportes">Deportes</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" name="videojuegos" value="videojuegos" id="videojuegos">
+                    <input type="checkbox" value="VI" id="videojuegos">
                     <label for="videojuegos">Videojuegos</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" name="manualidades" value="manualidades" id="manualidades">
+                    <input type="checkbox" value="MA" id="manualidades">
                     <label for="manualidades">Manualidades</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" name="artes" value="artes" id="artes">
+                    <input type="checkbox" value="AR" id="artes">
                     <label for="artes">Artes</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" name="lectura" value="lectura" id="lectura">
+                    <input type="checkbox" value="LE" id="lectura">
                     <label for="lectura">Lectura</label>
                 </div>
+                <input id="aficiones" name="aficiones" type="text" hidden required>
+                <span id="errorAficiones" class="validation-message" for="aficiones"></span>
             </div>
         </fieldset>
 
@@ -112,17 +114,18 @@
         <fieldset>
             <legend>Datos de Publicación</legend>
             <label for="title">Título</label>
-            <input type="text" id="title" name="title" placeholder="Introduce el título de la publicación" required maxlength="15">
+            <span id="errorPubTitle" class="validation-message" for="title"></span>
+            <input type="text" id="title" name="title" placeholder="Introduce el título de la publicación" minlength="4" maxlength="15" required>
             <div id="titleCounter" class="counter">0/15</div>
 
             <label for="description" class="mt-1">Descripción</label>
-            <textarea id="description" name="description" placeholder="Añade aquí la descripción" maxlength="120"></textarea>
+            <span id="errorPubDesc" class="validation-message" for="description"></span>
+            <textarea id="description" name="description" placeholder="Añade aquí la descripción" minlength="4" maxlength="120"></textarea>
             <div id="descriptionCounter" class="counter">0/120</div>
         </fieldset>
 
         <!-- Botón de Envío -->
         <button type="submit">Enviar</button>
-        
     </form>
 
     <a class="return" href="../index.html">Volver</a>

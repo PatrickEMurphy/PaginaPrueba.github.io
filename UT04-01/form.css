@@ -133,3 +133,7 @@ select:focus {
     color: red;
     font-weight: 600;
 }
+
+.aficion > input[type="checkbox"]{
+    transform: scale(1);
+}

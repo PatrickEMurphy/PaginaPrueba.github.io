@@ -14,18 +14,18 @@
             <div class="col2-Cont">
                 <div>
                     <label for="username">Nombre de Usuario</label>
-                    <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" required>
+                    <input type="text" id="username" name="username" placeholder="Introduce tu nombre de usuario" minlength="4" maxlength="20" required>
                     <span id="errorUser" class="validation-message" for="username"></span>
                 </div>
                 
                 <div>
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
+                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" title="Deben ser 8 dígitos numéricos" pattern="^\d{8}$" required>
                     <span id="errorPass" class="validation-message" for="password"></span>
                 </div>
 
                 <div class="checkbox-container">
-                    <input type="checkbox" id="showPassword" name="showPassword">
+                    <input type="checkbox" id="showPassword">
                     <label for="showPassword">Mostrar contraseña</label>
                 </div>
             </div>     
@@ -37,19 +37,23 @@
             <div class="col2-Cont">
                 <div>
                     <label for="firstName">Nombre</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required>
+                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" title="Inserte su nombre" minlength="4" maxlength="20" required>
+                    <span id="errorFirstName" class="validation-message" for="firstName"></span>
                 </div>
                 <div>
                     <label for="lastName">Apellidos</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Apellidos" required>
+                    <input type="text" id="lastName" name="lastName" placeholder="Apellidos" title="Inserte sus apellidos" minlength="4" maxlength="20" required>
+                    <span id="errorLastName" class="validation-message" for="lastName"></span>
                 </div>
                 <div>
                     <label for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Elemplo (+34)111222333" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Elemplo: +34911922933" pattern="^\+34[0-9]{9}$" title="Debe empezar con +34 seguido de 9 dígitos. Ejemplo: +34922123123" required>
+                    <span id="errorPhone" class="validation-message" for="phone"></span>
                 </div>
                 <div>
                     <label for="postalCode">Código Postal</label>
-                    <input type="text" id="postalCode" name="postalCode" placeholder="Códigopostal" pattern="[0-9]{5}" required>
+                    <input type="text" id="postalCode" name="postalCode" placeholder="Ejemplo: 38XXX" pattern="^38[0-9]{3}$" title="Debe comenzar con 38 y tener 5 dígitos. Ejemplo: 38001" required>
+                    <span id="errorPostalCode" class="validation-message" for="postalCode"></span>
                 </div>
             </div>
             <div class="col3-Cont mt-1">
@@ -63,20 +67,23 @@
                         </select>
                         <input id="DniNie" type="text" name="DniNie" placeholder="DNI / NIE" disabled required/>
                     </div>
+                    <span id="errorDniNie" class="validation-message" for="DniNie"></span>
                 </div>
                 <div>
                     <label>Crear cuenta como</label><br>
                     <label>Particular</label>
-                    <input type="radio" name="accountType" value="particular" required>
+                    <input id="accountType" type="radio" name="accountType" value="particular" required>
                     <label>Empresa</label>
                     <input type="radio" name="accountType" value="empresa" required>
+                    <span id="errorAccount" class="validation-message" for="accountType"></span>
                 </div>   
                 <div>
-                    <label for="">Año de nacimiento</label><br>
-                    <select name="birthYear" id="birthYear">
+                    <label for="birthYear">Año de nacimiento</label><br>
+                    <select name="birthYear" id="birthYear" required>
                         <!-- Opciones generadas dinámicamente -->
 
                     </select>
+                    <span id="errorBirthYear" class="validation-message" for="birthYear"></span>
                 </div>
             </div>
             <p>Elige tus aficiones:</p>
@@ -120,7 +127,7 @@
 
             <label for="description" class="mt-1">Descripción</label>
             <span id="errorPubDesc" class="validation-message" for="description"></span>
-            <textarea id="description" name="description" placeholder="Añade aquí la descripción" minlength="4" maxlength="120"></textarea>
+            <textarea id="description" name="description" placeholder="Añade aquí la descripción" minlength="4" maxlength="120" required></textarea>
             <div id="descriptionCounter" class="counter">0/120</div>
         </fieldset>
 
@@ -128,8 +135,12 @@
         <button type="submit">Enviar</button>
     </form>
 
+    <section class="errorLog">
+        balls
+    </section>
+
     <a class="return" href="../index.html">Volver</a>
     
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

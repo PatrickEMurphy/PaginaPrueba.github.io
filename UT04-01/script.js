@@ -1,33 +1,74 @@
-const DOM = {
-    form: document.getElementById("form"),
-    username: document.getElementById("username"),
-    password: document.getElementById("password"),
+const form = document.getElementById("form")
+const INPUT = {
+    Username: document.getElementById("username"),
+    Password: document.getElementById("password"),
+    Name: document.getElementById("firstName"),
+    LastName: document.getElementById("lastName"),
+    Tel: document.getElementById("phone"),
+    Postal: document.getElementById("postalCode"),
+    DNI_NIE: document.getElementById("DniNie"),
+    AccountType: document.getElementById("accountType"),
+    BirthYear: document.getElementById("birthYear"),
+    Hobbies: document.getElementById("aficiones"),
+    PublicationTitle: document.getElementById("title"),
+    PublicationDescription: document.getElementById("description"),
 };
 
 const ERROR = {
-    User: document.getElementById("errorUser"),
-    Pass: document.getElementById("errorPass"),
-    Name: document.getElementById(""),
-    LastName: document.getElementById(""),
-    Tel: document.getElementById(""),
-    Postal: document.getElementById(""),
-    DNI_NIE: document.getElementById(""),
-    AccountType: document.getElementById(""),
-    BirthYear: document.getElementById(""),
+    Username: document.getElementById("errorUser"),
+    Password: document.getElementById("errorPass"),
+    Name: document.getElementById("errorFirstName"),
+    LastName: document.getElementById("errorLastName"),
+    Tel: document.getElementById("errorPhone"),
+    Postal: document.getElementById("errorPostalCode"),
+    DNI_NIE: document.getElementById("errorDniNie"),
+    AccountType: document.getElementById("errorAccount"),
+    BirthYear: document.getElementById("errorBirthYear"),
     Hobbies: document.getElementById("errorAficiones"),
     PublicationTitle: document.getElementById("errorPubTitle"),
     PublicationDescription: document.getElementById("errorPubDesc"),
 };
 
-// Validaciones
-DOM.form.addEventListener("submit", (e)=>{
-    checkboxInput();
-    ERROR.User.textContent = DOM.username.validationMessage;
-    ERROR.Pass.textContent = DOM.password.validationMessage;
-    //e.preventDefault(); 
+// Listener submit
+form.addEventListener("submit", (e)=>{
+    form.classList.add("submited");
+    checkboxInput(); 
+    if (checkValidationMessages()) {
+        validate();
+        e.preventDefault(); 
+    } 
 })
 
-// Comprobar chackbox.
+// Validaciones
+function validate() {
+    //Errores por defecto
+    for (const key in INPUT) {
+        if (INPUT[key] && ERROR[key]) {
+            ERROR[key].textContent = INPUT[key].validationMessage;
+        }
+    }
+
+    if (INPUT.Hobbies.validationMessage) {
+        ERROR.Hobbies.textContent = "Debes elegir como mínimo 2 aficiones";
+    }
+    
+}
+
+// Función para comprobar los de validación
+function checkValidationMessages() {
+    let error = false;
+    for (const key in INPUT) {
+        console.log(key);
+        if (INPUT[key] && INPUT[key].validationMessage) {
+            console.log(`${key}: ${INPUT[key].validationMessage}`);
+            error = true;
+            break;
+        }
+    }
+    return error;
+}
+
+// Comprobar checkbox.
 function checkboxInput(){
     let checkboxes = document.querySelectorAll('.aficion > input[type="checkbox"]');
     let hiddenInput = document.getElementById('aficiones');
@@ -45,7 +86,24 @@ function checkboxInput(){
     }
 }
 
-
+// Comprobar DNI/NIE
+function validateDniNie() {
+    const select = document.getElementById("dniSelect");
+    if (select.value == "dni") {
+        if (/^\d{8}[A-Za-z]$/.test(INPUT.DNI_NIE.value)){
+            INPUT.DNI_NIE.validationMessage = "El formato de DNI no es válido";
+            return false;
+        } 
+        const letrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
+        let dni = INPUT.DNI_NIE.value;
+        let numero = parseInt(dni.slice(0,8));
+        let letra = dni.slice(8);
+        return letra === letrasDNI[numero%23];
+        
+    } else if(select.value == "dni") {
+        
+    }
+}
 
 
 // Mostrar contraseña
@@ -89,7 +147,7 @@ const currentYear = new Date().getFullYear();
 const selectElement = document.getElementById("birthYear");
 
 // Generamos las opciones para los años desde 1900 hasta el año actual
-for (let year = currentYear; year >= 1900; year--) {
+for (let year = 2010; year >= 1920; year--) {
     const option = document.createElement("option");
     option.value = year;
     option.textContent = year;

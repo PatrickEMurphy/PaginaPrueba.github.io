@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="form.css">
 </head>
 <body>
+    <div class="body-cont">
     <form id="form" action="https://www.w3schools.com/action_page.php" method="post" novalidate>
         <!-- Datos de Usuario -->
         <fieldset>
@@ -60,7 +61,7 @@
                 <div>
                     <label for="dniSelect">DNI / NIE</label>
                     <div class="select-dni">
-                        <select name="dniSelect" id="dniSelect">
+                        <select name="dniSelect" id="dniSelect" required>
                             <option value="">--</option>
                             <option value="dni">DNI</option>
                             <option value="nie">NIE</option>
@@ -121,23 +122,27 @@
         <fieldset>
             <legend>Datos de Publicación</legend>
             <label for="title">Título</label>
-            <span id="errorPubTitle" class="validation-message" for="title"></span>
             <input type="text" id="title" name="title" placeholder="Introduce el título de la publicación" minlength="4" maxlength="15" required>
-            <div id="titleCounter" class="counter">0/15</div>
+            <div class="underInput">
+                <span id="errorPubTitle" class="validation-message" for="title"></span>
+                <div id="titleCounter" class="counter">0/15</div>
+            </div>
 
             <label for="description" class="mt-1">Descripción</label>
-            <span id="errorPubDesc" class="validation-message" for="description"></span>
             <textarea id="description" name="description" placeholder="Añade aquí la descripción" minlength="4" maxlength="120" required></textarea>
-            <div id="descriptionCounter" class="counter">0/120</div>
+            <div class="underInput">
+                <span id="errorPubDesc" class="validation-message" for="description"></span>
+                <div id="descriptionCounter" class="counter">0/120</div>
+            </div>
         </fieldset>
 
         <!-- Botón de Envío -->
         <button type="submit">Enviar</button>
     </form>
 
-    <section class="errorLog">
-        balls
+    <section id="errorLog" class="errorLog">
     </section>
+    </div>
 
     <a class="return" href="../index.html">Volver</a>
     

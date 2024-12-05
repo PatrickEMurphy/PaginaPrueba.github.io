@@ -119,11 +119,17 @@ select:focus {
     margin-top: 1em;
 }
 
+.underInput{
+    display: flex;
+    justify-content: space-between;
+}
+.underInput > *{
+    line-height: 0;
+}
 .counter{
-    width: 100%;
     text-align: end;
     color: #333;
-    line-height: 0;
+    display: inline;
 }
 
 .return{
@@ -142,17 +148,45 @@ select:focus {
     display: block;
 }
 
-form.submited input:invalid, 
-form.submited textarea:invalid{
+form.submited *:invalid:not(fieldset){
     border: 2px solid red;
 }
 
 /*Error Log*/
 .errorLog{
-    background-color: rosybrown;
+    background-color: rgb(230, 188, 188);
     width: 100;
     margin-top: 20px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.errorLog::before{
+    content: "Log de errores";
+    font-size: 2em;
+    font-weight: bold;
+}
+.errorName{
+    color: crimson;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/*Body*/
+.body-cont{
+    display: block;
+}
+
+@media screen and (min-width: 1600px) {
+    .body-cont{
+        display: flex;
+        justify-content: space-around;
+        gap: 1em;
+    }
+    .body-cont > *{
+        flex-grow: 1;
+    }
+    .errorLog{
+        margin-top: 0;
+    }
 }

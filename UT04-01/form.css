@@ -33,6 +33,9 @@ label {
     margin-bottom: 8px;
     font-weight: bold;
 }
+.br{
+    display: block;
+}
 input, textarea {
     width: 100%;
     padding: 8px;
@@ -150,6 +153,14 @@ select:focus {
 
 form.submited *:invalid:not(fieldset){
     border: 2px solid red;
+    background-color: #FFDDDD;
+}
+.error-aficiones{
+    grid-column: span 3;
+}
+*:valid:not(fieldset):not(button):not(form){
+    border: 1px solid cornflowerblue;
+    background-color: #DDDDff;
 }
 
 /*Error Log*/
@@ -177,7 +188,7 @@ form.submited *:invalid:not(fieldset){
     display: block;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1200px) {
     .body-cont{
         display: flex;
         justify-content: space-around;

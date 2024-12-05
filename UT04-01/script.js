@@ -1,3 +1,4 @@
+// Selectores de elementos
 const form = document.getElementById("form");
 const errorLog = document.getElementById("errorLog");
 
@@ -33,34 +34,48 @@ const ERROR = {
     PublicationDescription: document.getElementById("errorPubDesc"),
 };
 
+// Mensajes de error para cada campo
+const errorMessages = {
+    Username: "Nombre de Usuario obligatorio",
+    Password: "Contraseña obligatoria",
+    Name: "Nombre obligatorio",
+    LastName: "Apellido obligatorio",
+    Tel: "Teléfono obligatorio",
+    Postal: "Código Postal obligatorio",
+    Dni_Nie_Select: "Selecciona el tipo de DNI/NIE",
+    DNI_NIE: "DNI/NIE obligatorio",
+    AccountType: "Tipo de cuenta obligatorio",
+    BirthYear: "Año de nacimiento obligatorio",
+    Hobbies: "Debes elegir como mínimo 2 aficiones",
+    PublicationTitle: "Título de la publicación obligatorio",
+    PublicationDescription: "Descripción de la publicación obligatoria",
+};
+
 // Listener submit
 form.addEventListener("submit", (e)=>{
     form.classList.add("submited");
-    checkboxInput(); 
-    if (checkValidationMessages()) {
-        validateDniNie();
+    checkboxInput();
+    validateDniNie();
+    if (checkValidationMessages()) { 
         validate();
         show_errorLogs();
         e.preventDefault(); 
     } 
 })
 
+//
 // Validaciones
+//
+
 function validate() {
     //Errores por defecto
     for (const key in INPUT) {
-        if (INPUT[key] && ERROR[key]) {
-            ERROR[key].textContent = INPUT[key].validationMessage;
-        }
-    }
-
+        if (INPUT[key] && ERROR[key] && INPUT[key].validationMessage) {
+            ERROR[key].textContent = errorMessages[key];
+        } else ERROR[key].textContent = "";
+    } 
     // Mensajes custom
-    if (INPUT.Hobbies.validationMessage) {
-        ERROR.Hobbies.textContent = "Debes elegir como mínimo 2 aficiones";
-    }
-    if (INPUT.Dni_Nie_Select.validationMessage) {
-        ERROR.Dni_Nie_Select.textContent = INPUT.Dni_Nie_Select.validationMessage;
-    }
+    if (INPUT.Dni_Nie_Select.validationMessage) ERROR.Dni_Nie_Select.textContent = INPUT.Dni_Nie_Select.validationMessage;
 }
 
 // Mostrar errores en los logs
@@ -72,7 +87,7 @@ function show_errorLogs() {
             let p = document.createElement("p");
             let span = document.createElement("span");
             span.classList.add("errorName");
-            span.textContent = key;
+            span.textContent = INPUT[key].name;
             let text = document.createTextNode(" " + INPUT[key].validationMessage);
             p.append(span, text);
 
@@ -106,34 +121,52 @@ function checkboxInput(){
 
     if (checkedValues.length >= 2) {
         hiddenInput.value = checkedValues.join(",");
+        INPUT.Hobbies.setCustomValidity("");
     } else {
         hiddenInput.value = null;
+        INPUT.Hobbies.setCustomValidity("Debes elegir como mínimo 2 aficiones");
     }
 }
 
 // Comprobar DNI/NIE
 function validateDniNie() {
-    const select = document.getElementById("dniSelect");
-    if (select.value == "dni") {
-        if (!/^\d{8}[A-Za-z]$/.test(INPUT.DNI_NIE.value)){
-            //INPUT.DNI_NIE.validationMessage = "El formato de DNI no es válido";
-            ERROR.DNI_NIE.textContent = "El formato de DNI no es válido";
-        } 
-        const letrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
-        let dni = INPUT.DNI_NIE.value;
-        let numero = parseInt(dni.slice(0,8));
-        let letra = dni.slice(8).toUpperCase();
-        console.log(`${dni} ${numero} ${letra} ${letrasDNI[numero%23]}`);
-        console.log(letra == letrasDNI[numero%23]);
-        return letra === letrasDNI[numero%23];
-        
-    } else if(select.value == "nie") {
-        
+    const select = INPUT.Dni_Nie_Select;
+
+    // Obtener el DNI/NIE
+    let dninie = INPUT.DNI_NIE.value.toUpperCase();
+
+    if (select.value == "nie" && !/^[XYZ]\d{7}[A-Za-z]$/i.test(INPUT.DNI_NIE.value)){
+        INPUT.DNI_NIE.setCustomValidity(`El formato del NIE no es válido`);
+        return false;
     }
+    if (select.value == "dni" && !/^\d{8}[A-Za-z]$/.test(INPUT.DNI_NIE.value)){
+        INPUT.DNI_NIE.setCustomValidity(`El formato del DNI no es válido`);
+        return false;
+    }
+
+    // Sustituye la letra XYZ del nie por su numero correspondiente
+    if (select.value == "nie"){
+        const sustituir = { X: "0", Y: "1", Z: "2" };
+        dninie = dninie.replace(/^[XYZ]/i, match => sustituir[match.toUpperCase()]);
+    }
+    
+    // Separar el numero de las letras
+    const letrasDNINIE = "TRWAGMYFPDXBNJZSQVHLCKE";
+    let numero = parseInt(dninie.slice(0,8));
+    let letra = dninie.slice(8);
+
+    // Comprobar si el Dni es válido
+    if (letra !== letrasDNINIE[numero%23]) INPUT.DNI_NIE.setCustomValidity(`El ${select.value == "dni"? "DNI":"NIE"} no es válido`);
+    else INPUT.DNI_NIE.setCustomValidity("");
+    
+    return letra === letrasDNINIE[numero%23];
 }
 
 
-// Mostrar contraseña
+// 
+//  FUNCIONALIDADES
+//
+
 // Obtenemos el checkbox y el input de la contraseña
 const showPasswordCheckbox = document.getElementById('showPassword');
 const passwordInput = document.getElementById('password');
